@@ -63,9 +63,13 @@
     
     [[FzhBluetooth shareInstance]writeValue:textF.text forCharacteristic:[FZSingletonManager shareInstance].GPrint_Chatacter completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
         NSLog(@"发送成功");
+        if (!messageLabel.text) {
+            messageLabel.text = @"";
+        }
+        messageLabel.text = [NSString stringWithFormat:@"%@\nsend：%@",messageLabel.text,textF.text];
     } returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
         NSLog(@"应答数据，%@",returnStr);
-        messageLabel.text = [NSString stringWithFormat:@"send：%@\nrep：%@",textF.text,returnStr];
+        messageLabel.text = [NSString stringWithFormat:@"%@\nrep：%@",messageLabel.text,returnStr];
     }];
 }
 
