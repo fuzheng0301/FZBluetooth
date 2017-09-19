@@ -44,8 +44,24 @@
     //创建展示列表
     [self createTableView];
     
-    //搜索蓝牙设备
-    [self scanBluetooths];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    label.text = @"请打开系统蓝牙";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor blackColor];
+    label.alpha = 0.3;
+    label.userInteractionEnabled = NO;
+    //监听蓝牙状态
+    [[FzhBluetooth shareInstance]returnBluetoothStateWithBlock:^(CBManagerState *state) {
+        if (state != CBCentralManagerStatePoweredOn) {
+            [self.view addSubview:label];
+        } else {
+            [label removeFromSuperview];
+            //搜索蓝牙设备
+            [self scanBluetooths];
+        }
+    }];
+    
 }
 
 #pragma mark --- 创建蓝牙设备列表

@@ -34,13 +34,23 @@
     if (self) {
         fzhCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         resultStr = @"";
+        self.serviceArr = [[NSMutableArray alloc]init];
     }
     return self;
+}
+
+#pragma mark --- 系统当前蓝牙的状态
+- (void)returnBluetoothStateWithBlock:(FZStateUpdateBlock)stateBlock
+{
+    self.stateUpdateBlock = stateBlock;
 }
 
 //检查App的设备BLE是否可用 （ensure that Bluetooth low energy is supported and available to use on the central device）
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
+    if (_stateUpdateBlock) {
+        _stateUpdateBlock(central.state);
+    }
     switch (central.state)
     {
         case CBCentralManagerStatePoweredOn:
@@ -179,6 +189,10 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
         NSLog(@"didDiscoverServices : %@", [error localizedDescription]);
         return;
     }
+    
+    //提取出所有特征
+    self.serviceArr = [NSMutableArray arrayWithArray:peripheral.services];
+    
     for (CBService *s in peripheral.services) {
         [s.peripheral discoverCharacteristics:nil forService:s];
     }

@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 /** 蓝牙状态改变的block */
-typedef void(^FZStateUpdateBlock)(CBCentralManager *central);
+typedef void(^FZStateUpdateBlock)(CBManagerState *state);
 /** 发现一个蓝牙外设的block */
 typedef void(^FZDiscoverPeripheralBlock)(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI);
 /** 连接完成的block*/
@@ -49,6 +49,18 @@ typedef void(^FZEquipmentReturnBlock)(CBPeripheral *peripheral, CBCharacteristic
  设置设备特性UUID，如果不设置默认为空
  */
 @property (nonatomic, strong) NSString *UUIDString;
+
+/**
+ * 连接设备后获取到的所有Service
+ */
+@property (nonatomic, strong) NSMutableArray *serviceArr;
+
+/**
+ 系统当前蓝牙的状态
+
+ @param stateBlock 实时返回当前蓝牙状态
+ */
+- (void)returnBluetoothStateWithBlock:(FZStateUpdateBlock)stateBlock;
 
 /**
  *  开始搜索蓝牙外设，每次在block中返回一个蓝牙外设信息
