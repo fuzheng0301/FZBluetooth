@@ -18,6 +18,7 @@
 		3A2FC34D1F6F7B52003CFD82 /* FZHProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC34C1F6F7B52003CFD82 /* FZHProgressHUD.m */; };
 		3A2FC3531F6F7B69003CFD82 /* FZBlueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3501F6F7B69003CFD82 /* FZBlueModel.m */; };
 		3A2FC3541F6F7B69003CFD82 /* FZSingletonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3521F6F7B69003CFD82 /* FZSingletonManager.m */; };
+		3A2FC3E11F73A348003CFD82 /* FzhString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3E01F73A348003CFD82 /* FzhString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		3A2FC3511F6F7B69003CFD82 /* FZSingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZSingletonManager.h; sourceTree = "<group>"; };
 		3A2FC3521F6F7B69003CFD82 /* FZSingletonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZSingletonManager.m; sourceTree = "<group>"; };
 		3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FzhCallBlock.h; sourceTree = "<group>"; };
+		3A2FC3DF1F73A348003CFD82 /* FzhString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FzhString.h; sourceTree = "<group>"; };
+		3A2FC3E01F73A348003CFD82 /* FzhString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FzhString.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,8 @@
 				3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */,
 				3A2FC33E1F6F7060003CFD82 /* FzhBluetooth.h */,
 				3A2FC33F1F6F7060003CFD82 /* FzhBluetooth.m */,
+				3A2FC3DF1F73A348003CFD82 /* FzhString.h */,
+				3A2FC3E01F73A348003CFD82 /* FzhString.m */,
 			);
 			path = FzhBluetooth;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				3A2FC3531F6F7B69003CFD82 /* FZBlueModel.m in Sources */,
 				3A2FC34D1F6F7B52003CFD82 /* FZHProgressHUD.m in Sources */,
 				3A2FC32B1F6F7056003CFD82 /* AppDelegate.m in Sources */,
+				3A2FC3E11F73A348003CFD82 /* FzhString.m in Sources */,
 				3A2FC3541F6F7B69003CFD82 /* FZSingletonManager.m in Sources */,
 				3A2FC3281F6F7056003CFD82 /* main.m in Sources */,
 				3A2FC3401F6F7060003CFD82 /* FzhBluetooth.m in Sources */,

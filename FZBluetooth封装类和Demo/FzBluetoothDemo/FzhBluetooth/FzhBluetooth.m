@@ -7,6 +7,7 @@
 //
 
 #import "FzhBluetooth.h"
+#import "FzhString.h"
 
 @implementation FzhBluetooth
 {
@@ -143,7 +144,7 @@
 #pragma mark --- 写入数据
 - (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock  returnBlock:(FZEquipmentReturnBlock)equipmentBlock
 {
-    NSData *data = [self convertHexStrToData:dataStr];
+    NSData *data = [[FzhString sharedInstance]convertHexStrToData:dataStr];
     _writeToCharacteristicBlock = completionBlock;
     _equipmentReturnBlock = equipmentBlock;
     [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
@@ -249,59 +250,12 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     if (!characteristic.value) {
         return;
     }
-    if (resultStr.length <= 0 || ![resultStr isEqualToString:[self fzHexStringFromData:characteristic.value]]) {
-        resultStr = [self fzHexStringFromData:characteristic.value];
+    if (resultStr.length <= 0 || ![resultStr isEqualToString:[[FzhString sharedInstance] fzHexStringFromData:characteristic.value]]) {
+        resultStr = [[FzhString sharedInstance]fzHexStringFromData:characteristic.value];
         if (_equipmentReturnBlock) {
             _equipmentReturnBlock(peripheral,characteristic,resultStr,error);
         }
     }
-}
-
-#pragma mark - NSData转16进制NSString
-- (NSString *)fzHexStringFromData:(NSData *)data
-{
-    Byte *bytes = (Byte *)[data bytes];
-    //下面是Byte 转换为16进制
-    NSString *hexStr=@"";
-    for(int i=0;i<[data length];i++){
-        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
-        if([newHexStr length]==1){
-            hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
-        }else{
-            hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
-        }
-    }
-    return hexStr;
-}
-
-#pragma mark - NSString转NSData
-- (NSMutableData *)convertHexStrToData:(NSString *)str
-{
-    if (!str || [str length] == 0) {
-        return nil;
-    }
-    
-    NSMutableData *hexData = [[NSMutableData alloc] initWithCapacity:8];
-    NSRange range;
-    if ([str length] %2 == 0) {
-        range = NSMakeRange(0,2);
-    } else {
-        range = NSMakeRange(0,1);
-    }
-    for (NSInteger i = range.location; i < [str length]; i += 2) {
-        unsigned int anInt;
-        NSString *hexCharStr = [str substringWithRange:range];
-        NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
-        
-        [scanner scanHexInt:&anInt];
-        NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
-        [hexData appendData:entity];
-        
-        range.location += range.length;
-        range.length = 2;
-    }
-    
-    return hexData;
 }
 
 #pragma mark ---------------- 获取信号之后的回调 ------------------

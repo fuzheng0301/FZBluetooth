@@ -101,20 +101,4 @@
  */
 - (void)cancelPeripheralConnection;
 
-/**
- NSData转16进制NSString
-
- @param data data数据
- @return string数据
- */
-- (NSString *)fzHexStringFromData:(NSData *)data;
-
-/**
- NSString转NSData
-
- @param str string数据
- @return data数据
- */
-- (NSMutableData *)convertHexStrToData:(NSString *)str;
-
 @end
