@@ -41,6 +41,7 @@
 		3A2FC3501F6F7B69003CFD82 /* FZBlueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZBlueModel.m; sourceTree = "<group>"; };
 		3A2FC3511F6F7B69003CFD82 /* FZSingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZSingletonManager.h; sourceTree = "<group>"; };
 		3A2FC3521F6F7B69003CFD82 /* FZSingletonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZSingletonManager.m; sourceTree = "<group>"; };
+		3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FzhCallBlock.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 		3A2FC33D1F6F7060003CFD82 /* FzhBluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */,
 				3A2FC33E1F6F7060003CFD82 /* FzhBluetooth.h */,
 				3A2FC33F1F6F7060003CFD82 /* FzhBluetooth.m */,
 			);
@@ -368,6 +370,7 @@
 				3A2FC33C1F6F7056003CFD82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
