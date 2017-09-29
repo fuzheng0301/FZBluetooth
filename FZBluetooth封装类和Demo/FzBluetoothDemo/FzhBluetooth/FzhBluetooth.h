@@ -10,8 +10,24 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "FzhCallBlock.h"
 
+typedef enum : NSUInteger {
+    SetAutomaticConnectionEquipmen = 0,
+    DelateAutomaticConnectionEquipmen,
+} AutomaticConnectionEquipmenEnum;
+
+@protocol FZAutomaticConnectionDelegate
+
+/**
+ 写入信息后，获取到设备应答字符串
+ */
+@optional - (void)connectionWithPerpheral:(CBPeripheral *)peripheral;
+
+@end
+
 @interface FzhBluetooth : NSObject<CBPeripheralDelegate,CBCentralManagerDelegate,CBPeripheralManagerDelegate>
 
+@property (assign,nonatomic) AutomaticConnectionEquipmenEnum connectionEquipment;
+@property (strong, nonatomic) id delegate;
 @property (copy, nonatomic) FZStateUpdateBlock stateUpdateBlock;
 /** 发现一个蓝牙外设的回调 */
 @property (copy, nonatomic) FZDiscoverPeripheralBlock               discoverPeripheralBlcok;
@@ -83,7 +99,7 @@
 - (double)fzRssiToNumber:(NSNumber *)RSSI;
 
 /**
- *  往某个特性中写入数据
+ *  往某个特性中写入数据，自动识别数据长度超过限制分段传输
  *
  *  @param dataStr       写入的数据
  *  @param characteristic 特性对象
@@ -100,5 +116,13 @@
  *  断开蓝牙连接
  */
 - (void)cancelPeripheralConnection;
+
+/**
+ 设置或删除自动连接设备
+
+ @param setOrDel 自动连接和删除自动连接
+ @param peripheral 设备peripheral
+ */
+-(void)createAutomaticConnectionEquipmenWithSetOrDelate:(AutomaticConnectionEquipmenEnum)setOrDel Peripheral:(CBPeripheral *)peripheral;
 
 @end

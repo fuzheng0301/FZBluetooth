@@ -17,6 +17,9 @@
     
     NSString *prefixString; //记录设备名称包含字符串
     NSString *resultStr;    //记录应答数据
+    
+    NSInteger   writeCount;   /**< 写入次数 */
+    NSInteger   responseCount; /**< 返回次数 */
 }
 
 +(instancetype)shareInstance
@@ -84,6 +87,7 @@
                 failBlock:(FZConnectFailBlock)failBlock
 {
     fzhPeripheral = peripheral;
+    
     //连接设备
     [fzhCentralManager connectPeripheral:peripheral options:nil];
     //4.设置代理
@@ -97,6 +101,10 @@
 //搜索蓝牙代理方法
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    //
+    NSString *perName = [[NSUserDefaults standardUserDefaults] objectForKey:@"conPeripheral"];
+    NSString *setOrDelNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"setOrDel"];
+    
     if (_discoverPeripheralBlcok) {
         if (prefixString.length > 0) {
             if ([peripheral.name hasPrefix:prefixString]) {
@@ -106,6 +114,13 @@
             _discoverPeripheralBlcok(central,peripheral,advertisementData,RSSI);
         }
         [self start];
+    }
+    if ([setOrDelNum isEqualToString:@"0"]) {
+        //有自动重连的设备
+        if ([peripheral.name isEqualToString:perName]) {
+            [fzhCentralManager connectPeripheral:peripheral options:nil];
+        }
+        return;
     }
 }
 
@@ -122,6 +137,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (_connectSuccessBlock) {
             _connectSuccessBlock(peripheral,nil,self.writeCharacteristic);
+        } else {
+            //返回连接成功
+            if ([self.delegate respondsToSelector:@selector(connectionWithPerpheral:)]) {
+                [self.delegate connectionWithPerpheral:peripheral];
+            }
         }
     });
 }
@@ -144,10 +164,33 @@
 #pragma mark --- 写入数据
 - (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock  returnBlock:(FZEquipmentReturnBlock)equipmentBlock
 {
-    NSData *data = [[FzhString sharedInstance]convertHexStrToData:dataStr];
+    writeCount = 0;
+    responseCount = 0;
+    
+    NSMutableArray *sendArr = [[NSMutableArray alloc]init];
+    if (dataStr.length > 40) {
+        int count = dataStr.length / 40 + 1;
+        for (int i = 0; i < count; i ++) {
+            if (i < count-1) {
+                [sendArr addObject:[dataStr substringWithRange:NSMakeRange(0+i*40, 40)]];
+            } else {
+                [sendArr addObject:[dataStr substringFromIndex:i*40]];
+            }
+        }
+        for (NSString *sendStr in sendArr) {
+            NSData *data = [[FzhString sharedInstance] convertHexStrToData:sendStr];
+            _writeToCharacteristicBlock = completionBlock;
+            _equipmentReturnBlock = equipmentBlock;
+            [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+            writeCount ++;
+        }
+        return;
+    }
+    NSData *data = [[FzhString sharedInstance] convertHexStrToData:dataStr];
     _writeToCharacteristicBlock = completionBlock;
     _equipmentReturnBlock = equipmentBlock;
     [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    writeCount ++;
 }
 
 //写数据后回调
@@ -156,6 +199,13 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error
 {
     resultStr = @"";
+    if (!_writeToCharacteristicBlock) {
+        return;
+    }
+    responseCount ++;
+    if (writeCount != responseCount) {
+        return;
+    }
     _writeToCharacteristicBlock(characteristic,error);
 }
 
@@ -170,6 +220,23 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
 {
     if (fzhPeripheral) {
         [fzhCentralManager cancelPeripheralConnection:fzhPeripheral];
+    }
+}
+
+#pragma mark --- 设置或删除自动连接设备
+-(void)createAutomaticConnectionEquipmenWithSetOrDelate:(AutomaticConnectionEquipmenEnum)setOrDel Peripheral:(CBPeripheral *)peripheral
+{
+    self.connectionEquipment = setOrDel;
+    if (setOrDel == SetAutomaticConnectionEquipmen) {
+        //设置自动连接设备
+        [[NSUserDefaults standardUserDefaults] setObject:peripheral.name forKey:@"conPeripheral"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%lu",(unsigned long)setOrDel] forKey:@"setOrDel"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else if (setOrDel == DelateAutomaticConnectionEquipmen) {
+        //删除自动连接设备
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"conPeripheral"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"setOrDel"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

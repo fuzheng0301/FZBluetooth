@@ -13,7 +13,7 @@
 #import "FZSingletonManager.h"
 #import "SendViewController.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,FZHProgressHUDDelegate>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,FZHProgressHUDDelegate,FZAutomaticConnectionDelegate>
 {
     UITableView *mytableView;
     UILabel * nameLabel; //蓝牙名字
@@ -21,6 +21,7 @@
     UILabel * distanceLabel; //距离
     
     FZHProgressHUD * HUD;
+    FzhBluetooth *bluetooth;
 }
 @property (nonatomic,strong) NSMutableArray *blueListArr;
 @end
@@ -44,6 +45,9 @@
     //创建展示列表
     [self createTableView];
     
+    bluetooth = [[FzhBluetooth alloc]init];
+    bluetooth.delegate = self;
+    
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     label.text = @"请打开系统蓝牙";
     label.textColor = [UIColor whiteColor];
@@ -52,7 +56,7 @@
     label.alpha = 0.3;
     label.userInteractionEnabled = NO;
     //监听蓝牙状态
-    [[FzhBluetooth shareInstance]returnBluetoothStateWithBlock:^(CBManagerState *state) {
+    [bluetooth returnBluetoothStateWithBlock:^(CBManagerState *state) {
         if (state != CBCentralManagerStatePoweredOn) {
             [self.view addSubview:label];
         } else {
@@ -76,7 +80,7 @@
 #pragma mark --- 搜索蓝牙设备
 -(void)scanBluetooths
 {
-    [[FzhBluetooth shareInstance]scanForPeripheralsWithPrefixName:@"okey" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
+    [bluetooth scanForPeripheralsWithPrefixName:@"okey" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
         
         NSInteger perpheralIndex = -1 ;
@@ -92,7 +96,7 @@
         model.blueName = peripheral.name;
         model.peripheral = peripheral;
         model.UUIDString = peripheral.identifier.UUIDString;
-        double min = [[FzhBluetooth shareInstance] fzRssiToNumber:RSSI];
+        double min = [bluetooth  fzRssiToNumber:RSSI];
         model.distance = [NSString stringWithFormat:@"%.2f",min];
         if (perpheralIndex != -1) {
             [self.blueListArr replaceObjectAtIndex:perpheralIndex withObject:model];
@@ -157,18 +161,21 @@
     [HUD show:YES];
     
     //停止扫描
-    [[FzhBluetooth shareInstance]stopScan];
+    [bluetooth stopScan];
     
     FZBlueModel *blueModel = self.blueListArr[indexPath.row];
     //设置目标设备特征UUID
-    [FzhBluetooth shareInstance].UUIDString = @"0000FEE9-0000-1000-8000-00805F9B34FB";
+    bluetooth .UUIDString = @"0000FEE9-0000-1000-8000-00805F9B34FB";
     //连接设备
-    [[FzhBluetooth shareInstance]connectPeripheral:blueModel.peripheral completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
+    [bluetooth connectPeripheral:blueModel.peripheral completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
         NSLog(@"链接成功");
         [HUD hide:YES];
         
-        [FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance].writeCharacteristic;
+        [FZSingletonManager shareInstance].GPrint_Chatacter = bluetooth .writeCharacteristic;
         [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
+        
+        //设置自动重连
+        [bluetooth createAutomaticConnectionEquipmenWithSetOrDelate:SetAutomaticConnectionEquipmen Peripheral:peripheral];
         
         SendViewController *sendVC = [[SendViewController alloc]init];
         [self.navigationController pushViewController:sendVC animated:YES];
@@ -178,6 +185,15 @@
     }];
 }
 
+#pragma mark --- 自动连接设备走到这里
+-(void)connectionWithPerpheral:(CBPeripheral *)peripheral
+{
+    [FZSingletonManager shareInstance].GPrint_Chatacter = bluetooth .writeCharacteristic;
+    [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
+    
+    SendViewController *sendVC = [[SendViewController alloc]init];
+    [self.navigationController pushViewController:sendVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
