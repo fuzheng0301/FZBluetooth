@@ -290,6 +290,11 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
         }else if (properties & CBCharacteristicPropertyNotify) {
             self.notifyCharacteristic = c;
             [peripheral setNotifyValue:YES forCharacteristic:c];
+        }else if (properties & CBCharacteristicPropertyWriteWithoutResponse) {
+            fzgCharacteristic = c;
+            self.writeCharacteristic = c;
+        }else if (properties & CBCharacteristicPropertyIndicate) {
+            self.notifyCharacteristic = c;
         }
     }
 }
