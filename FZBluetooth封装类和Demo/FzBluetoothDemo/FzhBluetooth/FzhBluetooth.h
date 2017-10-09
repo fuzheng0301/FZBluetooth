@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
 @protocol FZAutomaticConnectionDelegate
 
 /**
- 写入信息后，获取到设备应答字符串
+ 自动连接的设备代理方法
  */
 @optional - (void)connectionWithPerpheral:(CBPeripheral *)peripheral;
 
