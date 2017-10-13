@@ -13,6 +13,8 @@
 #import "FZSingletonManager.h"
 #import "SendViewController.h"
 
+#define UUID_String @"0000FEE9-0000-1000-8000-00805F9B34FB"
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,FZHProgressHUDDelegate,FZAutomaticConnectionDelegate>
 {
     UITableView *mytableView;
@@ -21,7 +23,6 @@
     UILabel * distanceLabel; //距离
     
     FZHProgressHUD * HUD;
-    FzhBluetooth *bluetooth;
 }
 @property (nonatomic,strong) NSMutableArray *blueListArr;
 @end
@@ -45,8 +46,11 @@
     //创建展示列表
     [self createTableView];
     
-    bluetooth = [[FzhBluetooth alloc]init];
-    bluetooth.delegate = self;
+    [FzhBluetooth shareInstance].delegate = self;
+    //删除自动重连
+//    [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:DelateAutomaticConnectionEquipmen Peripheral:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didHaveAutoConnection) name:PostAutoConnectionNotificaiton object:nil];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     label.text = @"请打开系统蓝牙";
@@ -56,7 +60,7 @@
     label.alpha = 0.3;
     label.userInteractionEnabled = NO;
     //监听蓝牙状态
-    [bluetooth returnBluetoothStateWithBlock:^(CBManagerState *state) {
+    [[FzhBluetooth shareInstance] returnBluetoothStateWithBlock:^(CBManagerState *state) {
         if (state != CBCentralManagerStatePoweredOn) {
             [self.view addSubview:label];
         } else {
@@ -65,7 +69,11 @@
             [self scanBluetooths];
         }
     }];
-    
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [HUD hide:YES];
 }
 
 #pragma mark --- 创建蓝牙设备列表
@@ -80,7 +88,7 @@
 #pragma mark --- 搜索蓝牙设备
 -(void)scanBluetooths
 {
-    [bluetooth scanForPeripheralsWithPrefixName:@"okey" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
+    [[FzhBluetooth shareInstance] scanForPeripheralsWithPrefixName:@"okey" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
         
         NSInteger perpheralIndex = -1 ;
@@ -96,7 +104,7 @@
         model.blueName = peripheral.name;
         model.peripheral = peripheral;
         model.UUIDString = peripheral.identifier.UUIDString;
-        double min = [bluetooth  fzRssiToNumber:RSSI];
+        double min = [[FzhBluetooth shareInstance]  fzRssiToNumber:RSSI];
         model.distance = [NSString stringWithFormat:@"%.2f",min];
         if (perpheralIndex != -1) {
             [self.blueListArr replaceObjectAtIndex:perpheralIndex withObject:model];
@@ -161,21 +169,21 @@
     [HUD show:YES];
     
     //停止扫描
-    [bluetooth stopScan];
+    [[FzhBluetooth shareInstance] stopScan];
     
     FZBlueModel *blueModel = self.blueListArr[indexPath.row];
     //设置目标设备特征UUID
-    bluetooth .UUIDString = @"0000FEE9-0000-1000-8000-00805F9B34FB";
+    [FzhBluetooth shareInstance] .UUIDString = UUID_String;
     //连接设备
-    [bluetooth connectPeripheral:blueModel.peripheral completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
+    [[FzhBluetooth shareInstance] connectPeripheral:blueModel.peripheral completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
         NSLog(@"链接成功");
         [HUD hide:YES];
         
-        [FZSingletonManager shareInstance].GPrint_Chatacter = bluetooth .writeCharacteristic;
+        [FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance] .writeCharacteristic;
         [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
         
         //设置自动重连
-        [bluetooth createAutomaticConnectionEquipmenWithSetOrDelate:SetAutomaticConnectionEquipmen Peripheral:peripheral];
+        [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:SetAutomaticConnectionEquipmen Peripheral:peripheral];
         
         SendViewController *sendVC = [[SendViewController alloc]init];
         [self.navigationController pushViewController:sendVC animated:YES];
@@ -185,12 +193,21 @@
     }];
 }
 
+-(void)didHaveAutoConnection
+{
+    [HUD show:YES];
+}
+
 #pragma mark --- 自动连接设备走到这里
 -(void)connectionWithPerpheral:(CBPeripheral *)peripheral
 {
-    [FZSingletonManager shareInstance].GPrint_Chatacter = bluetooth .writeCharacteristic;
+    [FzhBluetooth shareInstance].UUIDString = UUID_String;
+    [[FzhBluetooth shareInstance]createCharacticWithPeripheral:peripheral UUIDString:UUID_String];
+    
+    [FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance] .writeCharacteristic;
     [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
     
+    [HUD hide:YES];
     SendViewController *sendVC = [[SendViewController alloc]init];
     [self.navigationController pushViewController:sendVC animated:YES];
 }

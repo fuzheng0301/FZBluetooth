@@ -117,10 +117,11 @@
     }
     if ([setOrDelNum isEqualToString:@"0"]) {
         //有自动重连的设备
+        [[NSNotificationCenter defaultCenter]postNotificationName:PostAutoConnectionNotificaiton object:nil];
         if ([peripheral.name isEqualToString:perName]) {
+            fzhPeripheral = peripheral;
             [fzhCentralManager connectPeripheral:peripheral options:nil];
         }
-        return;
     }
 }
 
@@ -275,6 +276,24 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     }
     
 #warning ---此处需要筛选自己需要的特征
+    [self createCharacticWithPeripheral:peripheral Service:service];
+}
+
+#pragma mark --- 重新设置特征值
+-(void)createCharacticWithPeripheral:(CBPeripheral *)peripheral UUIDString:(NSString *)uuidString
+{
+    for (CBService *s in peripheral.services) {
+        [s.peripheral discoverCharacteristics:nil forService:s];
+        
+        if ([s.UUID isEqual: [CBUUID UUIDWithString:uuidString]]) {
+            [self createCharacticWithPeripheral:peripheral Service:s];
+        }
+    }
+}
+
+// 筛选特征
+-(void)createCharacticWithPeripheral:(CBPeripheral *)peripheral Service:(CBService *)service
+{
     if (self.UUIDString) {
         if (![service.UUID  isEqual:[CBUUID UUIDWithString:self.UUIDString]]) {
             return;

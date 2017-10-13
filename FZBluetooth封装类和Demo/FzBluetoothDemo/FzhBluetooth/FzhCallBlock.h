@@ -9,6 +9,8 @@
 #ifndef FzhCallBlock_h
 #define FzhCallBlock_h
 
+#define PostAutoConnectionNotificaiton @"AutoConnectionNotificaiton"
+
 /** 蓝牙状态改变的block */
 typedef void(^FZStateUpdateBlock)(CBManagerState *state);
 /** 发现一个蓝牙外设的block */

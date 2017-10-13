@@ -125,4 +125,12 @@ typedef enum : NSUInteger {
  */
 -(void)createAutomaticConnectionEquipmenWithSetOrDelate:(AutomaticConnectionEquipmenEnum)setOrDel Peripheral:(CBPeripheral *)peripheral;
 
+/**
+ 重新设置特征值
+ 
+ @param peripheral peripheral
+ @param uuidString uuidString
+ */
+-(void)createCharacticWithPeripheral:(CBPeripheral *)peripheral UUIDString:(NSString *)uuidString;
+
 @end
