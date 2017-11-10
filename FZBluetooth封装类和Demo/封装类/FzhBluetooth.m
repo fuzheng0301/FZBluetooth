@@ -43,6 +43,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self stopScan];
+    fzhCentralManager.delegate = nil;
+    fzhPeripheral.delegate = nil;
+}
+
 #pragma mark --- 系统当前蓝牙的状态
 - (void)returnBluetoothStateWithBlock:(FZStateUpdateBlock)stateBlock
 {

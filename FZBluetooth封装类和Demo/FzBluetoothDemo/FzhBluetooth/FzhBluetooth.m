@@ -43,6 +43,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self stopScan];
+    fzhCentralManager.delegate = nil;
+    fzhPeripheral.delegate = nil;
+}
+
 #pragma mark --- 系统当前蓝牙的状态
 - (void)returnBluetoothStateWithBlock:(FZStateUpdateBlock)stateBlock
 {
@@ -182,6 +189,15 @@
             NSData *data = [[FzhString sharedInstance] convertHexStrToData:sendStr];
             _writeToCharacteristicBlock = completionBlock;
             _equipmentReturnBlock = equipmentBlock;
+            if (fzhPeripheral == nil) {
+                NSString *desc = NSLocalizedString(@"Not connected devices", @"");
+                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+                NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
+                                                     code:-101
+                                                 userInfo:userInfo];
+                _writeToCharacteristicBlock(nil,error);
+                return;
+            }
             [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
             writeCount ++;
         }
@@ -190,6 +206,15 @@
     NSData *data = [[FzhString sharedInstance] convertHexStrToData:dataStr];
     _writeToCharacteristicBlock = completionBlock;
     _equipmentReturnBlock = equipmentBlock;
+    if (fzhPeripheral == nil) {
+        NSString *desc = NSLocalizedString(@"Not connected devices", @"");
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+        NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
+                                             code:-101
+                                         userInfo:userInfo];
+        _writeToCharacteristicBlock(nil,error);
+        return;
+    }
     [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     writeCount ++;
 }
