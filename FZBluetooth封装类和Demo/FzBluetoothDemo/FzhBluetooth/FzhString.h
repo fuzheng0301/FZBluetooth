@@ -74,4 +74,14 @@
  */
 - (NSMutableData *)convertHexStrToData:(NSString *)str;
 
+/**
+ 自定义error信息
+
+ @param domain 标志字段(如：com.okey.wearkit.domain)
+ @param code error编号
+ @param errorStr error信息
+ @return error
+ */
+-(NSError *)returnErrorWithDomain:(NSString *)domain Code:(int)code ErrorStr:(NSString *)errorStr;
+
 @end
