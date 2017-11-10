@@ -225,4 +225,15 @@ static FzhString *dbManger=nil;
     return hexData;
 }
 
+#pragma mark --- 自定义error
+-(NSError *)returnErrorWithDomain:(NSString *)domain Code:(int)code ErrorStr:(NSString *)errorStr
+{
+    NSString *desc = NSLocalizedString(errorStr, @"");
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+    NSError *error = [NSError errorWithDomain:domain
+                                         code:code
+                                     userInfo:userInfo];
+    return error;
+}
+
 @end
