@@ -11,8 +11,8 @@
 #import "FzhCallBlock.h"
 
 typedef enum : NSUInteger {
-    SetAutomaticConnectionEquipmen = 0,
-    DelateAutomaticConnectionEquipmen,
+    SetAutomaticConnectionEquipmen = 0,		//设置自动连接的设备
+    DelateAutomaticConnectionEquipmen,		//删除自动连接的设备
 } AutomaticConnectionEquipmenEnum;
 
 @protocol FZAutomaticConnectionDelegate
@@ -119,10 +119,28 @@ typedef enum : NSUInteger {
 
 /**
  设置或删除自动连接设备
+ 设置后，在代理方法connectionWithPerpheral:里会返回设备的peripheral
 
  @param setOrDel 自动连接和删除自动连接
  @param peripheral 设备peripheral
  */
 -(void)createAutomaticConnectionEquipmenWithSetOrDelate:(AutomaticConnectionEquipmenEnum)setOrDel Peripheral:(CBPeripheral *)peripheral;
+
+/**
+ 通过UUID获取peripheral
+ 用户自主记录想要自动连接的UUID，获取peripheral后调用连接方法
+ 
+ @param UUIDString UUID
+ @return peripheral
+ */
+- (CBPeripheral *)retrievePeripheralWithUUIDString:(NSString *)UUIDString;
+
+/**
+ 重新设置特征值
+ 
+ @param peripheral peripheral
+ @param uuidString uuidString
+ */
+-(void)createCharacticWithPeripheral:(CBPeripheral *)peripheral UUIDString:(NSString *)uuidString;
 
 @end

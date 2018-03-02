@@ -42,33 +42,42 @@
     HUD.delegate = self;
     HUD.animationType = FZHProgressHUDAnimationZoom;
     HUD.labelText = @"连接中...";
-    
+	
     //创建展示列表
     [self createTableView];
     
     [FzhBluetooth shareInstance].delegate = self;
     //删除自动重连
-//    [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:DelateAutomaticConnectionEquipmen Peripheral:nil];
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didHaveAutoConnection) name:PostAutoConnectionNotificaiton object:nil];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    label.text = @"请打开系统蓝牙";
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor blackColor];
-    label.alpha = 0.3;
-    label.userInteractionEnabled = NO;
-    //监听蓝牙状态
-    [[FzhBluetooth shareInstance] returnBluetoothStateWithBlock:^(CBManagerState *state) {
-        if (state != CBCentralManagerStatePoweredOn) {
-            [self.view addSubview:label];
-        } else {
-            [label removeFromSuperview];
-            //搜索蓝牙设备
-            [self scanBluetooths];
-        }
-    }];
+    [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:DelateAutomaticConnectionEquipmen Peripheral:nil];
+	
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didHaveAutoConnection) name:PostAutoConnectionNotificaiton object:nil];
+	
+	UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+	label.text = @"请打开系统蓝牙";
+	label.textColor = [UIColor whiteColor];
+	label.textAlignment = NSTextAlignmentCenter;
+	label.backgroundColor = [UIColor blackColor];
+	label.alpha = 0.3;
+	label.userInteractionEnabled = NO;
+	//监听蓝牙状态
+	[[FzhBluetooth shareInstance] returnBluetoothStateWithBlock:^(CBManagerState *state) {
+		if (state != CBCentralManagerStatePoweredOn) {
+			[self.view addSubview:label];
+		} else {
+			[label removeFromSuperview];
+			//搜索蓝牙设备
+			[self scanBluetooths];
+			
+			//是否有UUID，如果有自动重连
+			NSString * uuid = [[NSUserDefaults standardUserDefaults] objectForKey:@"DeviceUUID"];
+			if (uuid.length > 0) {
+				CBPeripheral * p = [[FzhBluetooth shareInstance] retrievePeripheralWithUUIDString:uuid];
+				
+				[FzhBluetooth shareInstance] .UUIDString = UUID_String;
+				[self autoCollectBluetoothWithPeripheral:p];
+			}
+		}
+	}];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -83,6 +92,38 @@
     mytableView.delegate = self;
     mytableView.dataSource = self;
     [self.view addSubview:mytableView];
+}
+
+#pragma mark --- 有自动重连设备
+-(void)autoCollectBluetoothWithPeripheral:(CBPeripheral *)p
+{
+	[HUD show:YES];
+	
+	//停止扫描
+	[[FzhBluetooth shareInstance] stopScan];
+	
+	[[FzhBluetooth shareInstance] connectPeripheral:p completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
+		NSLog(@"链接成功");
+		[HUD hide:YES];
+		
+		//当前蓝牙model
+		FZBlueModel * blueModel = [[FZBlueModel alloc]init];
+		blueModel.blueName = peripheral.name;
+		blueModel.peripheral = peripheral;
+		blueModel.UUIDString = peripheral.identifier.UUIDString;
+		
+		[FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance] .writeCharacteristic;
+		[FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
+		
+		//本地保存
+		[[NSUserDefaults standardUserDefaults] setObject:blueModel.UUIDString forKey:@"DeviceUUID"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		SendViewController *sendVC = [[SendViewController alloc]init];
+		[self.navigationController pushViewController:sendVC animated:YES];
+	} failBlock:^(CBPeripheral *peripheral, NSError *error) {
+		NSLog(@"链接失败");
+	}];
 }
 
 #pragma mark --- 搜索蓝牙设备
@@ -181,10 +222,14 @@
         
         [FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance] .writeCharacteristic;
         [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;
-        
+		
+		//本地保存
+		[[NSUserDefaults standardUserDefaults] setObject:blueModel.UUIDString forKey:@"DeviceUUID"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
         //设置自动重连
-        [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:SetAutomaticConnectionEquipmen Peripheral:peripheral];
-        
+//        [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:SetAutomaticConnectionEquipmen Peripheral:peripheral];
+		
         SendViewController *sendVC = [[SendViewController alloc]init];
         [self.navigationController pushViewController:sendVC animated:YES];
         
@@ -198,7 +243,7 @@
     [HUD show:YES];
 }
 
-#pragma mark --- 自动连接设备走到这里
+#pragma mark --- 有自动连接设备走到这里
 -(void)connectionWithPerpheral:(CBPeripheral *)peripheral
 {
     [FzhBluetooth shareInstance].UUIDString = UUID_String;

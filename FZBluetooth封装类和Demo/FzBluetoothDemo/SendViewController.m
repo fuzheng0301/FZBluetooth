@@ -41,6 +41,7 @@
 {
     textF = [[UITextField alloc]initWithFrame:CGRectMake(ScreenWidth/2-110, 80, 220, 40)];
     textF.placeholder = @"输入发送给设备的指令";
+	textF.text = @"5ac2000000c2a5";
     textF.layer.borderWidth = 1.0;
     [self.view addSubview:textF];
     

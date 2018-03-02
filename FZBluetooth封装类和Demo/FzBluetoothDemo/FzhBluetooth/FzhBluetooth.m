@@ -266,6 +266,20 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     }
 }
 
+#pragma mark --- 通过UUID获取peripheral
+- (CBPeripheral *)retrievePeripheralWithUUIDString:(NSString *)UUIDString
+{
+	CBPeripheral *p = nil;
+	@try {
+		NSUUID *uuid = [[NSUUID alloc]initWithUUIDString:UUIDString];
+		p = [fzhCentralManager retrievePeripheralsWithIdentifiers:@[uuid]][0];
+	} @catch (NSException *exception) {
+		NSLog(@">>> retrievePeripheralWithUUIDString error:%@",exception);
+	} @finally {
+	}
+	return p;
+}
+
 #pragma mark --- 断开蓝牙连接走这里
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {

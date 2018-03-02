@@ -76,7 +76,7 @@
 
 /**
  自定义error信息
- 
+
  @param domain 标志字段(如：com.okey.wearkit.domain)
  @param code error编号
  @param errorStr error信息
