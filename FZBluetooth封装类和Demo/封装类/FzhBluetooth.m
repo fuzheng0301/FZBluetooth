@@ -219,6 +219,29 @@
     writeCount ++;
 }
 
+#pragma mark --- 写入数据 同步返回数据
+-(NSDictionary *)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic
+{
+	__block NSString * str = nil;
+	__block NSError *reError = nil;
+	[self writeValue:dataStr forCharacteristic:characteristic completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+		NSLog(@"发送成功");
+		reError = error;
+	} returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
+		str = returnStr;
+		reError = error;
+	}];
+	
+	while (!str) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+	}
+	
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+	[dict setValue:reError forKey:@"error"];
+	[dict setValue:str forKey:@"returnStr"];
+	return dict;
+}
+
 //写数据后回调
 - (void)peripheral:(CBPeripheral *)peripheral
 didWriteValueForCharacteristic:(CBCharacteristic *)characteristic

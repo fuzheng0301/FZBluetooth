@@ -61,17 +61,31 @@
         return;
     }
     [self.view endEditing:YES];
-    
-    [[FzhBluetooth shareInstance]writeValue:textF.text forCharacteristic:[FZSingletonManager shareInstance].GPrint_Chatacter completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
-        NSLog(@"发送成功");
-        if (!messageLabel.text) {
-            messageLabel.text = @"";
-        }
-        messageLabel.text = [NSString stringWithFormat:@"%@\nsend：%@",messageLabel.text,textF.text];
-    } returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
-        NSLog(@"应答数据，%@",returnStr);
-        messageLabel.text = [NSString stringWithFormat:@"%@\nrep：%@",messageLabel.text,returnStr];
-    }];
+	
+	if (!messageLabel.text) {
+		messageLabel.text = @"";
+	}
+	messageLabel.text = [NSString stringWithFormat:@"%@\nsend：%@",messageLabel.text,textF.text];
+	NSDictionary *dic = [[FzhBluetooth shareInstance]writeValue:textF.text forCharacteristic:[FZSingletonManager shareInstance].GPrint_Chatacter];
+	NSError *error = [dic objectForKey:@"error"];
+	if (error == nil) {
+		NSString *returnStr = [dic objectForKey:@"returnStr"];
+		NSLog(@"returnStr = %@",returnStr);
+		messageLabel.text = [NSString stringWithFormat:@"%@\nrep：%@\n",messageLabel.text,returnStr];
+	} else {
+		messageLabel.text = [NSString stringWithFormat:@"%@\nrep：%@\n",messageLabel.text,[error localizedDescription]];
+	}
+	
+//    [[FzhBluetooth shareInstance]writeValue:textF.text forCharacteristic:[FZSingletonManager shareInstance].GPrint_Chatacter completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+//        NSLog(@"发送成功");
+//        if (!messageLabel.text) {
+//            messageLabel.text = @"";
+//        }
+//        messageLabel.text = [NSString stringWithFormat:@"%@\nsend：%@",messageLabel.text,textF.text];
+//    } returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
+//        NSLog(@"应答数据，%@",returnStr);
+//        messageLabel.text = [NSString stringWithFormat:@"%@\nrep：%@",messageLabel.text,returnStr];
+//    }];
 }
 
 #pragma mark --- 点击屏幕空白处收起键盘

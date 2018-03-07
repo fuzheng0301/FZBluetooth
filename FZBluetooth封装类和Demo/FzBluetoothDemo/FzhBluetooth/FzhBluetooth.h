@@ -108,6 +108,15 @@ typedef enum : NSUInteger {
 - (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock returnBlock:(FZEquipmentReturnBlock)equipmentBlock;
 
 /**
+ *  往某个特性中写入数据，同步返回结果
+ *
+ *  @param dataStr       写入的数据
+ *  @param characteristic 特性对象
+ *  @return 设备应答结果 returnStr 应答内容  error 错误信息
+ */
+-(NSDictionary *)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic;
+
+/**
  *  停止扫描
  */
 - (void)stopScan;
