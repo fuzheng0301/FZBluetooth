@@ -80,7 +80,7 @@
 				3A2FC3291F6F7056003CFD82 /* AppDelegate.h */,
 				3A2FC32A1F6F7056003CFD82 /* AppDelegate.m */,
 				3A2FC34A1F6F7B52003CFD82 /* FZHProgressHUD */,
-				3A2FC33D1F6F7060003CFD82 /* FzhBluetooth */,
+				3A2FC33D1F6F7060003CFD82 /* FZHBluetooth */,
 				3A2FC34E1F6F7B69003CFD82 /* FZBlueModel */,
 				3A2FC32C1F6F7056003CFD82 /* ViewController.h */,
 				3A2FC32D1F6F7056003CFD82 /* ViewController.m */,
@@ -103,7 +103,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3A2FC33D1F6F7060003CFD82 /* FzhBluetooth */ = {
+		3A2FC33D1F6F7060003CFD82 /* FZHBluetooth */ = {
 			isa = PBXGroup;
 			children = (
 				3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */,
@@ -112,7 +112,7 @@
 				3A2FC3DF1F73A348003CFD82 /* FzhString.h */,
 				3A2FC3E01F73A348003CFD82 /* FzhString.m */,
 			);
-			path = FzhBluetooth;
+			path = FZHBluetooth;
 			sourceTree = "<group>";
 		};
 		3A2FC34A1F6F7B52003CFD82 /* FZHProgressHUD */ = {
@@ -339,6 +339,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7A99RNRSDE;
 				INFOPLIST_FILE = FzBluetoothDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fuzheng.FzBluetoothDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -351,6 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7A99RNRSDE;
 				INFOPLIST_FILE = FzBluetoothDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fuzheng.FzBluetoothDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
