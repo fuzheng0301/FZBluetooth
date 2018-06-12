@@ -177,7 +177,7 @@
     
     NSMutableArray *sendArr = [[NSMutableArray alloc]init];
     if (dataStr.length > 40) {
-        int count = dataStr.length / 40 + 1;
+        int count = (int)dataStr.length / 40 + 1;
         for (int i = 0; i < count; i ++) {
             if (i < count-1) {
                 [sendArr addObject:[dataStr substringWithRange:NSMakeRange(0+i*40, 40)]];
@@ -279,8 +279,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     if (setOrDel == SetAutomaticConnectionEquipmen) {
         //设置自动连接设备
         [[NSUserDefaults standardUserDefaults] setObject:peripheral.name forKey:@"conPeripheral"];
-		int count = (int)setOrDel;
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",count] forKey:@"setOrDel"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%lu",(long)setOrDel] forKey:@"setOrDel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else if (setOrDel == DelateAutomaticConnectionEquipmen) {
         //删除自动连接设备
