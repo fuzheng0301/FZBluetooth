@@ -60,8 +60,8 @@
 	label.alpha = 0.3;
 	label.userInteractionEnabled = NO;
 	//监听蓝牙状态
-	[[FzhBluetooth shareInstance] returnBluetoothStateWithBlock:^(CBManagerState *state) {
-		if (state != CBCentralManagerStatePoweredOn) {
+	[[FzhBluetooth shareInstance] returnBluetoothStateWithBlock:^(NSInteger state) {
+		if (state != 5) {
 			[self.view addSubview:label];
 		} else {
 			[label removeFromSuperview];

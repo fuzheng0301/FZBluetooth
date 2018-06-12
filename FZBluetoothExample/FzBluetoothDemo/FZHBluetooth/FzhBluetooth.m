@@ -279,7 +279,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     if (setOrDel == SetAutomaticConnectionEquipmen) {
         //设置自动连接设备
         [[NSUserDefaults standardUserDefaults] setObject:peripheral.name forKey:@"conPeripheral"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%lu",(unsigned long)setOrDel] forKey:@"setOrDel"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%lu",(long)setOrDel] forKey:@"setOrDel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else if (setOrDel == DelateAutomaticConnectionEquipmen) {
         //删除自动连接设备
@@ -337,7 +337,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
         return;
     }
     
-#warning ---此处需要筛选自己需要的特征
+#pragma mark ---此处需要筛选自己需要的特征
     [self createCharacticWithPeripheral:peripheral Service:service];
 }
 

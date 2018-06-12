@@ -12,7 +12,7 @@
 #define PostAutoConnectionNotificaiton @"AutoConnectionNotificaiton"
 
 /** 蓝牙状态改变的block */
-typedef void(^FZStateUpdateBlock)(CBManagerState *state);
+typedef void(^FZStateUpdateBlock)(NSInteger state);
 /** 发现一个蓝牙外设的block */
 typedef void(^FZDiscoverPeripheralBlock)(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI);
 /** 连接完成的block*/

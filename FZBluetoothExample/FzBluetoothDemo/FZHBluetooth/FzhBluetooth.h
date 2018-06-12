@@ -24,7 +24,7 @@ typedef enum : NSUInteger {
 
 @end
 
-@interface FzhBluetooth : NSObject<CBPeripheralDelegate,CBCentralManagerDelegate,CBPeripheralManagerDelegate>
+@interface FzhBluetooth : NSObject<CBPeripheralDelegate,CBCentralManagerDelegate>
 
 @property (assign,nonatomic) AutomaticConnectionEquipmenEnum connectionEquipment;
 @property (strong, nonatomic) id delegate;
