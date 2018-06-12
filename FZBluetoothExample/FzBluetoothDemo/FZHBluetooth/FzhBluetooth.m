@@ -279,7 +279,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     if (setOrDel == SetAutomaticConnectionEquipmen) {
         //设置自动连接设备
         [[NSUserDefaults standardUserDefaults] setObject:peripheral.name forKey:@"conPeripheral"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",(int)setOrDel] forKey:@"setOrDel"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",setOrDel] forKey:@"setOrDel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else if (setOrDel == DelateAutomaticConnectionEquipmen) {
         //删除自动连接设备
