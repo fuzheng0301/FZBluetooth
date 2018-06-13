@@ -14,17 +14,17 @@ pod "FZBluetooth","~>1.0.0"
 ```
 
 # 目录
-1. [系统蓝牙状态监听](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##1.系统蓝牙状态监听)
-2. [蓝牙搜索](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##2.蓝牙搜索)
-3. [蓝牙设备的连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##3.蓝牙设备的连接)
-4. [设备的自动连接设置](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##4.设备的自动连接设置)
-	[根据设备peripheral自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md###4.1.根据设备peripheral自动连接)
-	[通过设备UUID自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md###4.2.通过设备UUID自动连接)
-5. [写入数据](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##5.写入数据)
-	[异步Block方式返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md###5.1.异步Block方式返回结果)
-	[同步返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md###5.2.同步返回结果)
-6. [蓝牙的断开](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##6.蓝牙的断开)
-7. [其他](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md##7.其他)
+1. [系统蓝牙状态监听](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#1.系统蓝牙状态监听)
+2. [蓝牙搜索](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#2.蓝牙搜索)
+3. [蓝牙设备的连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#3.蓝牙设备的连接)
+4. [设备的自动连接设置](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.设备的自动连接设置)
+	[根据设备peripheral自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.1.根据设备peripheral自动连接)
+	[通过设备UUID自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.2.通过设备UUID自动连接)
+5. [写入数据](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.写入数据)
+	[异步Block方式返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.1.异步Block方式返回结果)
+	[同步返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.2.同步返回结果)
+6. [蓝牙的断开](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#6.蓝牙的断开)
+7. [其他](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#7.其他)
 
 # 方法说明简介
 
