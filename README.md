@@ -14,21 +14,17 @@ pod "FZBluetooth","~>1.0.0"
 ```
 
 # 目录
-1. [系统蓝牙状态监听](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#1.系统蓝牙状态监听)
-2. [蓝牙搜索](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#2.蓝牙搜索)
-3. [蓝牙设备的连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#3.蓝牙设备的连接)
-4. [设备的自动连接设置](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.设备的自动连接设置)
-	[根据设备peripheral自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.1.根据设备peripheral自动连接)
-	[通过设备UUID自动连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#4.2.通过设备UUID自动连接)
-5. [写入数据](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.写入数据)
-	[异步Block方式返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.1.异步Block方式返回结果)
-	[同步返回结果](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#5.2.同步返回结果)
-6. [蓝牙的断开](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#6.蓝牙的断开)
-7. [其他](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#7.其他)
+1. [系统蓝牙状态监听](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#系统蓝牙状态监听)
+2. [蓝牙搜索](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#蓝牙搜索)
+3. [蓝牙设备的连接](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#蓝牙设备的连接)
+4. [设备的自动连接设置](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#设备的自动连接设置)
+5. [写入数据](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#写入数据)
+6. [蓝牙的断开](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#蓝牙的断开)
+7. [其他](https://github.com/fuzheng0301/FZBluetooth/blob/master/README.md#其他)
 
 # 方法说明简介
 
-## 1.系统蓝牙状态监听
+## 系统蓝牙状态监听
 这个很方便，在系统蓝牙方法centralManagerDidUpdateState中就可以实时获取到蓝牙状态的改变，所以用一个Block回调就可以得到状态，根据状态变化做对应操作即可。
 
 方法代码如下：
@@ -44,7 +40,7 @@ pod "FZBluetooth","~>1.0.0"
 - (void)returnBluetoothStateWithBlock:(FZStateUpdateBlock)stateBlock;
 ```
 
-## 2.蓝牙搜索
+## 蓝牙搜索
 蓝牙搜索的功能方法中，用系统原生的方法scanForPeripheralsWithServices:options:，在蓝牙搜索的代理方法centralManager:didDiscoverPeripheral:advertisementData:RSSI:里获取搜索结果，用Block返回搜索结果。另外添加了方法通过设置参数nameStr来筛选返回的设备名称，nameStr为设备模糊搜索参数，设备中包含nameStr字段即可返回搜索结果。
 
 封装后的代码调用方法如下：
@@ -64,7 +60,7 @@ pod "FZBluetooth","~>1.0.0"
 - (void)scanForPeripheralsWithPrefixName:(NSString *)nameStr discoverPeripheral:(FZDiscoverPeripheralBlock)discoverBlock;
 ```
 
-## 3.蓝牙设备的连接
+## 蓝牙设备的连接
 蓝牙的连接为系统方法connectPeripheral:options:，连接设备的结果分别通过代理方法centralManager:didConnectPeripheral:返回成功、centralManager:didFailToConnectPeripheral:error:返回失败，通过两个Block分别返回成功和失败。其中成功后要停止搜索stopScan，失败要返回失败原因。
 
 代码方法如下：
@@ -82,9 +78,9 @@ pod "FZBluetooth","~>1.0.0"
 - (void)connectPeripheral:(CBPeripheral *)peripheral completeBlock:(FZConnectSuccessBlock)completionBlock failBlock:(FZConnectFailBlock)failBlock;
 ```
 
-## 4.设备的自动连接设置
+## 设备的自动连接设置
 设备的自动连接，这里我写了两种方法，大家可以根据自己喜好自由选择。
-### 4.1.根据设备peripheral自动连接
+### 1.根据设备peripheral自动连接
 方法代码如下：
 ```
 /**
@@ -117,7 +113,7 @@ pod "FZBluetooth","~>1.0.0"
 ```
 中可以获取到重连的设备peripheral，随后进行连接操作即可。
 
-### 4.2.通过设备UUID自动连接
+### 2.通过设备UUID自动连接
 代码方法如下：
 ```
 /**
@@ -137,12 +133,12 @@ pod "FZBluetooth","~>1.0.0"
 **使用方法：**
 获取到设备的UUID后，通过此方法得到设备的peripheral，然后调用连接设备的方法即可自动重新连接。
 
-## 5.写入数据
+## 写入数据
 写入数据，在大多数的第三方方法里会有UUID、characteristic、peripheral等很多参数，混乱不易理解。这里我封装后只留了一个characteristic特性参数，而且已经帮大家筛选出来了，可以在封装方法头文件里，连接设备成功后直接获取到。另一方面，写入内容直接用NSString类型就可以，内部会自动转成NSData格式写入设备。
 
 写入数据原生方法为writeValue:forCharacteristic:type:，写入数据后会在代理方法peripheral:didWriteValueForCharacteristic:error:方法里得到是否写入成功，成功与否用Block返回了结果。另外，如果蓝牙设备有应答的时候，会在peripheral:didUpdateValueForCharacteristic:error:方法里返回，处理起来比较麻烦，我下面封装了两种方法，一种通过Block异步返回结果，一种为同步返回应答结果，大家可以根据需要自由选择。
 
-### 5.1.异步Block方式返回结果
+### 1.异步Block方式返回结果
 代码封装后的接口为：
 ```
 /*
@@ -157,7 +153,7 @@ pod "FZBluetooth","~>1.0.0"
 
 - (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock returnBlock:(FZEquipmentReturnBlock)equipmentBlock;
 ```
-### 5.2.同步返回结果
+### 2.同步返回结果
 接口方法为：
 ```
 /**
@@ -178,7 +174,7 @@ pod "FZBluetooth","~>1.0.0"
 
 **这里需要注意的是：实际开发中，可以用一个叫lightBlue的蓝牙开发辅助APP，看一下设备有多少特征值，我们实际用的时候需要用哪个，这个可以直接询问硬件厂商或硬件开发人员，然后在调用写入方法前，设置封装类中的属性UUIDString的对应值，可以保证连接过程中稳定不出问题**
 
-## 6.蓝牙的断开
+## 蓝牙的断开
 蓝牙的断开，只留了一个方法，断开当前连接的设备，使用系统原生方法cancelPeripheralConnection:，设备的信息在连接时已自动记录，所以不需要传入参数
 
 代码封装后的方法如下：
@@ -192,7 +188,7 @@ pod "FZBluetooth","~>1.0.0"
 - (void)readRSSICompletionBlock:(FZGetRSSIBlock)getRSSIBlock;
 ```
 
-## 7.其他
+## 其他
 其他的方法，头文件里开放了”RSSI转距离Double类型数据”、”NSData转16进制字符串”、”NSString类型转NSData类型数据”三个方法。
 
 
