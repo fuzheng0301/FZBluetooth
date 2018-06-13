@@ -104,7 +104,7 @@
 	
 	[[FzhBluetooth shareInstance] connectPeripheral:p completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
 		NSLog(@"链接成功");
-		[HUD hide:YES];
+		[self->HUD hide:YES];
 		
 		//当前蓝牙model
 		FZBlueModel * blueModel = [[FZBlueModel alloc]init];
@@ -153,7 +153,7 @@
         else{
             [self.blueListArr addObject:model];
         }
-        [mytableView reloadData];
+		[self->mytableView reloadData];
     }];
 }
 
@@ -218,7 +218,7 @@
     //连接设备
     [[FzhBluetooth shareInstance] connectPeripheral:blueModel.peripheral completeBlock:^(CBPeripheral *peripheral, CBService *service, CBCharacteristic *character) {
         NSLog(@"链接成功");
-        [HUD hide:YES];
+		[self->HUD hide:YES];
         
         [FZSingletonManager shareInstance].GPrint_Chatacter = [FzhBluetooth shareInstance] .writeCharacteristic;
         [FZSingletonManager shareInstance].GPrint_Peripheral = peripheral;

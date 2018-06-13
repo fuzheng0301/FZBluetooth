@@ -143,8 +143,8 @@
     
     //延时操作
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (_connectSuccessBlock) {
-            _connectSuccessBlock(peripheral,nil,self.writeCharacteristic);
+        if (self.connectSuccessBlock) {
+            self.connectSuccessBlock(peripheral,nil,self.writeCharacteristic);
         } else {
             //返回连接成功
             if ([self.delegate respondsToSelector:@selector(connectionWithPerpheral:)]) {
