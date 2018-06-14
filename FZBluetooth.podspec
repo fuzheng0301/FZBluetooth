@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FZBluetooth"
-  s.version      = "1.0.0"
+  s.version      = "1.0.2"
   s.summary      = "FZBluetooth is An extension based on system Bluetooth method development."
   s.description  = <<-DESC
 An extension based on the system Bluetooth library, including Bluetooth basic functions such as lookup, connection, writing, and response. It is more convenient and lightweight to use after encapsulation.

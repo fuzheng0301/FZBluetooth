@@ -10,7 +10,7 @@ iOS蓝牙原生封装，助力智能硬件开发
 FZBluetooth is available on [CocoaPods](http://cocoapods.org).  Add the following to your Podfile:
 
 ```ruby
-pod "FZBluetooth","~>1.0.0"
+pod "FZBluetooth","~>1.0.2"
 ```
 
 # 目录
