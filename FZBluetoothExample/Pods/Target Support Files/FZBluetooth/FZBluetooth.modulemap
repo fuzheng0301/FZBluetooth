@@ -1,0 +1,6 @@
+framework module FZBluetooth {
+  umbrella header "FZBluetooth-umbrella.h"
+
+  export *
+  module * { export * }
+}

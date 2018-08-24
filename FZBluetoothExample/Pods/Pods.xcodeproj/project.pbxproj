@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		232F8366B416DDD84532BB885DC6FD36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E06D45054CEDA47E5508320F3B4CF552 /* Foundation.framework */; };
+		25DEE925DDA5F0AC596444FA359682E7 /* FzhString.h in Headers */ = {isa = PBXBuildFile; fileRef = EBD3B8E4A2EB05054C59F5FAB706DB57 /* FzhString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		36E6CDEA2DCD5D27E0F52BA4C8A6FA7D /* FZBluetooth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A01995D380DD8F378579D3D1F1A37D4C /* FZBluetooth-dummy.m */; };
+		5E6CCEAB6463F26747C2FEF0FC59B0D8 /* FZBluetooth-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AFC1B517593801BA49AAF50558A8C97 /* FZBluetooth-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		675A0DA707D32A866D88855336622E72 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58131A89065FC0D9E269086CFE8314F /* CoreBluetooth.framework */; };
+		73A256E66BD7A89FAEC81FA927E79D8F /* Pods-FzBluetoothDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BF13A03B4318A59671926DEE3D215 /* Pods-FzBluetoothDemo-dummy.m */; };
+		8B7E8286E412FD7B6C7B869D780D0046 /* Pods-FzBluetoothDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 842E1305D1170A64803A1D110E81E018 /* Pods-FzBluetoothDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C795DC34C77E146344400F1342E7B3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E06D45054CEDA47E5508320F3B4CF552 /* Foundation.framework */; };
+		91347FAD8F6BFDFEC86F0A605675B252 /* FzhBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = A60FC4AEF7BEE0C000890460D8CD7939 /* FzhBluetooth.m */; };
+		A046FC34B253A1F8BDFDB2EE03353BCA /* FzhString.m in Sources */ = {isa = PBXBuildFile; fileRef = C412BE9EA292E2CE5283982861E5AB4C /* FzhString.m */; };
+		A386393A0493BCCBEB11BDC10DC64B01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD674493AC9BB841A1F96B896E3F64D4 /* UIKit.framework */; };
+		B16FECE7D89EB5BD7AC185167CEB4356 /* FzhCallBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 020DB2753CC1DA254052DE2664FB9565 /* FzhCallBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C67C56FEEE0D2D6081CCA8B0E06CF8D6 /* FzhBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B81E4A26FCEF97C392E9FC24AB50F2 /* FzhBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D6A87C754C8E89D120A14B4E035279C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED6277C40A6D526810ABC4DD59624331;
+			remoteInfo = FZBluetooth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		018BF13A03B4318A59671926DEE3D215 /* Pods-FzBluetoothDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FzBluetoothDemo-dummy.m"; sourceTree = "<group>"; };
+		020DB2753CC1DA254052DE2664FB9565 /* FzhCallBlock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FzhCallBlock.h; path = FZBluetoothExample/FzBluetoothDemo/FZHBluetooth/FzhCallBlock.h; sourceTree = "<group>"; };
+		3A923C35A23D87C7B4F1A27336ECD578 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		428F2F6536A5AFB5805369144DAB9308 /* Pods-FzBluetoothDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FzBluetoothDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		438FB0F0917747B730214CDF58372C6E /* FZBluetooth-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FZBluetooth-prefix.pch"; sourceTree = "<group>"; };
+		526E0924A575D29ADC7C5E1FB26767C4 /* Pods-FzBluetoothDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FzBluetoothDemo-acknowledgements.plist"; sourceTree = "<group>"; };
+		58B99822187EECD1F8ABC55658EBCD31 /* FZBluetooth.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FZBluetooth.modulemap; sourceTree = "<group>"; };
+		5F22A91DED3FDEE6DCF9AA98A39486EB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		681ED215A40BFDA400C25D7C76B1C82C /* Pods-FzBluetoothDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FzBluetoothDemo.release.xcconfig"; sourceTree = "<group>"; };
+		6AFC1B517593801BA49AAF50558A8C97 /* FZBluetooth-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FZBluetooth-umbrella.h"; sourceTree = "<group>"; };
+		6B2428D4521E0B0ED177B820862D66DD /* FZBluetooth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FZBluetooth.xcconfig; sourceTree = "<group>"; };
+		6CA542AA7C10718D68B5C9DACC1E7D08 /* Pods-FzBluetoothDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FzBluetoothDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		75ECAAFEA6D4FF0F5DDA3812B174EABD /* Pods-FzBluetoothDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FzBluetoothDemo-frameworks.sh"; sourceTree = "<group>"; };
+		842E1305D1170A64803A1D110E81E018 /* Pods-FzBluetoothDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FzBluetoothDemo-umbrella.h"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		97B81E4A26FCEF97C392E9FC24AB50F2 /* FzhBluetooth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FzhBluetooth.h; path = FZBluetoothExample/FzBluetoothDemo/FZHBluetooth/FzhBluetooth.h; sourceTree = "<group>"; };
+		9A773070CC920F8867EBD93BBDC53BF9 /* Pods-FzBluetoothDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FzBluetoothDemo.modulemap"; sourceTree = "<group>"; };
+		9C6F36E064FBBE8E4D262501855C54DA /* Pods-FzBluetoothDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FzBluetoothDemo-resources.sh"; sourceTree = "<group>"; };
+		A01995D380DD8F378579D3D1F1A37D4C /* FZBluetooth-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FZBluetooth-dummy.m"; sourceTree = "<group>"; };
+		A60FC4AEF7BEE0C000890460D8CD7939 /* FzhBluetooth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FzhBluetooth.m; path = FZBluetoothExample/FzBluetoothDemo/FZHBluetooth/FzhBluetooth.m; sourceTree = "<group>"; };
+		A7BC6FC78C5A85364E932AEDE0296D38 /* FZBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FZBluetooth.framework; path = FZBluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACD4DD9FAD9B0A23FBE51BD55EEA88CE /* Pods_FzBluetoothDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FzBluetoothDemo.framework; path = "Pods-FzBluetoothDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD674493AC9BB841A1F96B896E3F64D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C412BE9EA292E2CE5283982861E5AB4C /* FzhString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FzhString.m; path = FZBluetoothExample/FzBluetoothDemo/FZHBluetooth/FzhString.m; sourceTree = "<group>"; };
+		C58131A89065FC0D9E269086CFE8314F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		E06D45054CEDA47E5508320F3B4CF552 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EBD3B8E4A2EB05054C59F5FAB706DB57 /* FzhString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FzhString.h; path = FZBluetoothExample/FzBluetoothDemo/FZHBluetooth/FzhString.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00469563BFCABBAD91362D391133DCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				675A0DA707D32A866D88855336622E72 /* CoreBluetooth.framework in Frameworks */,
+				8C795DC34C77E146344400F1342E7B3C /* Foundation.framework in Frameworks */,
+				A386393A0493BCCBEB11BDC10DC64B01 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC160DE9B609FD780316832E4D83286D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232F8366B416DDD84532BB885DC6FD36 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4276A806F5EFC0770B2EDEFFCB424C9 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1D2D06CB2416DE4253BBBF2F04E403E0 /* FZBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				97B81E4A26FCEF97C392E9FC24AB50F2 /* FzhBluetooth.h */,
+				A60FC4AEF7BEE0C000890460D8CD7939 /* FzhBluetooth.m */,
+				020DB2753CC1DA254052DE2664FB9565 /* FzhCallBlock.h */,
+				EBD3B8E4A2EB05054C59F5FAB706DB57 /* FzhString.h */,
+				C412BE9EA292E2CE5283982861E5AB4C /* FzhString.m */,
+				4122C701066895720C437A438A119908 /* Support Files */,
+			);
+			name = FZBluetooth;
+			path = FZBluetooth;
+			sourceTree = "<group>";
+		};
+		24F78675D7279D742BE735CD76A2069A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BD79858EAF9BB812706D8303AE0C5F8A /* Pods-FzBluetoothDemo */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		4122C701066895720C437A438A119908 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				58B99822187EECD1F8ABC55658EBCD31 /* FZBluetooth.modulemap */,
+				6B2428D4521E0B0ED177B820862D66DD /* FZBluetooth.xcconfig */,
+				A01995D380DD8F378579D3D1F1A37D4C /* FZBluetooth-dummy.m */,
+				438FB0F0917747B730214CDF58372C6E /* FZBluetooth-prefix.pch */,
+				6AFC1B517593801BA49AAF50558A8C97 /* FZBluetooth-umbrella.h */,
+				3A923C35A23D87C7B4F1A27336ECD578 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FZBluetooth";
+			sourceTree = "<group>";
+		};
+		47B1FC277B2E0A442F0DD553CE9ADD12 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC6FC78C5A85364E932AEDE0296D38 /* FZBluetooth.framework */,
+				ACD4DD9FAD9B0A23FBE51BD55EEA88CE /* Pods_FzBluetoothDemo.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				8DDD76479CED3919B24973071A21287C /* Pods */,
+				47B1FC277B2E0A442F0DD553CE9ADD12 /* Products */,
+				24F78675D7279D742BE735CD76A2069A /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8DDD76479CED3919B24973071A21287C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D2D06CB2416DE4253BBBF2F04E403E0 /* FZBluetooth */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BD79858EAF9BB812706D8303AE0C5F8A /* Pods-FzBluetoothDemo */ = {
+			isa = PBXGroup;
+			children = (
+				5F22A91DED3FDEE6DCF9AA98A39486EB /* Info.plist */,
+				9A773070CC920F8867EBD93BBDC53BF9 /* Pods-FzBluetoothDemo.modulemap */,
+				6CA542AA7C10718D68B5C9DACC1E7D08 /* Pods-FzBluetoothDemo-acknowledgements.markdown */,
+				526E0924A575D29ADC7C5E1FB26767C4 /* Pods-FzBluetoothDemo-acknowledgements.plist */,
+				018BF13A03B4318A59671926DEE3D215 /* Pods-FzBluetoothDemo-dummy.m */,
+				75ECAAFEA6D4FF0F5DDA3812B174EABD /* Pods-FzBluetoothDemo-frameworks.sh */,
+				9C6F36E064FBBE8E4D262501855C54DA /* Pods-FzBluetoothDemo-resources.sh */,
+				842E1305D1170A64803A1D110E81E018 /* Pods-FzBluetoothDemo-umbrella.h */,
+				428F2F6536A5AFB5805369144DAB9308 /* Pods-FzBluetoothDemo.debug.xcconfig */,
+				681ED215A40BFDA400C25D7C76B1C82C /* Pods-FzBluetoothDemo.release.xcconfig */,
+			);
+			name = "Pods-FzBluetoothDemo";
+			path = "Target Support Files/Pods-FzBluetoothDemo";
+			sourceTree = "<group>";
+		};
+		C4276A806F5EFC0770B2EDEFFCB424C9 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C58131A89065FC0D9E269086CFE8314F /* CoreBluetooth.framework */,
+				E06D45054CEDA47E5508320F3B4CF552 /* Foundation.framework */,
+				BD674493AC9BB841A1F96B896E3F64D4 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		102F74285C8A6E3984954AB1CB480E14 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B7E8286E412FD7B6C7B869D780D0046 /* Pods-FzBluetoothDemo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92EAAE855F0C86B3293329AFCDA1BB38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E6CCEAB6463F26747C2FEF0FC59B0D8 /* FZBluetooth-umbrella.h in Headers */,
+				C67C56FEEE0D2D6081CCA8B0E06CF8D6 /* FzhBluetooth.h in Headers */,
+				B16FECE7D89EB5BD7AC185167CEB4356 /* FzhCallBlock.h in Headers */,
+				25DEE925DDA5F0AC596444FA359682E7 /* FzhString.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		839DBBC6E86DF735E62AD8E40CF93D36 /* Pods-FzBluetoothDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DC8F346E584A3C5A06D30220609DCFF /* Build configuration list for PBXNativeTarget "Pods-FzBluetoothDemo" */;
+			buildPhases = (
+				E91B14A379B1205CFFFF0123712B23B8 /* Sources */,
+				EC160DE9B609FD780316832E4D83286D /* Frameworks */,
+				102F74285C8A6E3984954AB1CB480E14 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9D8E73F0A2A1372ED3774C4D3D4C8A36 /* PBXTargetDependency */,
+			);
+			name = "Pods-FzBluetoothDemo";
+			productName = "Pods-FzBluetoothDemo";
+			productReference = ACD4DD9FAD9B0A23FBE51BD55EEA88CE /* Pods_FzBluetoothDemo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ED6277C40A6D526810ABC4DD59624331 /* FZBluetooth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E90EE2FC832863AF27AC9B7520122A68 /* Build configuration list for PBXNativeTarget "FZBluetooth" */;
+			buildPhases = (
+				0184072E9449BDA6E00AAFE71908F92C /* Sources */,
+				00469563BFCABBAD91362D391133DCB0 /* Frameworks */,
+				92EAAE855F0C86B3293329AFCDA1BB38 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FZBluetooth;
+			productName = FZBluetooth;
+			productReference = A7BC6FC78C5A85364E932AEDE0296D38 /* FZBluetooth.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 47B1FC277B2E0A442F0DD553CE9ADD12 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED6277C40A6D526810ABC4DD59624331 /* FZBluetooth */,
+				839DBBC6E86DF735E62AD8E40CF93D36 /* Pods-FzBluetoothDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0184072E9449BDA6E00AAFE71908F92C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36E6CDEA2DCD5D27E0F52BA4C8A6FA7D /* FZBluetooth-dummy.m in Sources */,
+				91347FAD8F6BFDFEC86F0A605675B252 /* FzhBluetooth.m in Sources */,
+				A046FC34B253A1F8BDFDB2EE03353BCA /* FzhString.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E91B14A379B1205CFFFF0123712B23B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73A256E66BD7A89FAEC81FA927E79D8F /* Pods-FzBluetoothDemo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9D8E73F0A2A1372ED3774C4D3D4C8A36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FZBluetooth;
+			target = ED6277C40A6D526810ABC4DD59624331 /* FZBluetooth */;
+			targetProxy = D6A87C754C8E89D120A14B4E035279C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		01A189637A0AE8DB5DB99AA97CD1E46C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2428D4521E0B0ED177B820862D66DD /* FZBluetooth.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FZBluetooth/FZBluetooth-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FZBluetooth/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FZBluetooth/FZBluetooth.modulemap";
+				PRODUCT_MODULE_NAME = FZBluetooth;
+				PRODUCT_NAME = FZBluetooth;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		122F6ACC618A28588CBB3C50330D8649 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 428F2F6536A5AFB5805369144DAB9308 /* Pods-FzBluetoothDemo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FzBluetoothDemo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1EE19F5DD95931924296F637BF18BD8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		599535387DD1DAFC2C90FA948C723A10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 681ED215A40BFDA400C25D7C76B1C82C /* Pods-FzBluetoothDemo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FzBluetoothDemo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8DD90BCA04E45E2EC8B1E6D13B529A3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2428D4521E0B0ED177B820862D66DD /* FZBluetooth.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FZBluetooth/FZBluetooth-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FZBluetooth/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FZBluetooth/FZBluetooth.modulemap";
+				PRODUCT_MODULE_NAME = FZBluetooth;
+				PRODUCT_NAME = FZBluetooth;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F4568DEE257655D290C2B9CEAB37C934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EE19F5DD95931924296F637BF18BD8F /* Debug */,
+				F4568DEE257655D290C2B9CEAB37C934 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2DC8F346E584A3C5A06D30220609DCFF /* Build configuration list for PBXNativeTarget "Pods-FzBluetoothDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				122F6ACC618A28588CBB3C50330D8649 /* Debug */,
+				599535387DD1DAFC2C90FA948C723A10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E90EE2FC832863AF27AC9B7520122A68 /* Build configuration list for PBXNativeTarget "FZBluetooth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01A189637A0AE8DB5DB99AA97CD1E46C /* Debug */,
+				8DD90BCA04E45E2EC8B1E6D13B529A3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

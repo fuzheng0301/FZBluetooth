@@ -1,0 +1,16 @@
+PODS:
+  - FZBluetooth (1.0.2)
+
+DEPENDENCIES:
+  - FZBluetooth (~> 1.0.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FZBluetooth
+
+SPEC CHECKSUMS:
+  FZBluetooth: 11ca2e44d24c27533402b30eba58b440afbe82cb
+
+PODFILE CHECKSUM: aaed65e0c86c6a73c0d4778f6eec5013684282b1
+
+COCOAPODS: 1.5.3

@@ -13,15 +13,16 @@
 		3A2FC3311F6F7056003CFD82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2FC32F1F6F7056003CFD82 /* Main.storyboard */; };
 		3A2FC3331F6F7056003CFD82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2FC3321F6F7056003CFD82 /* Assets.xcassets */; };
 		3A2FC3361F6F7056003CFD82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2FC3341F6F7056003CFD82 /* LaunchScreen.storyboard */; };
-		3A2FC3401F6F7060003CFD82 /* FzhBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC33F1F6F7060003CFD82 /* FzhBluetooth.m */; };
 		3A2FC3491F6F745B003CFD82 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3481F6F745B003CFD82 /* SendViewController.m */; };
 		3A2FC34D1F6F7B52003CFD82 /* FZHProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC34C1F6F7B52003CFD82 /* FZHProgressHUD.m */; };
 		3A2FC3531F6F7B69003CFD82 /* FZBlueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3501F6F7B69003CFD82 /* FZBlueModel.m */; };
 		3A2FC3541F6F7B69003CFD82 /* FZSingletonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3521F6F7B69003CFD82 /* FZSingletonManager.m */; };
-		3A2FC3E11F73A348003CFD82 /* FzhString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FC3E01F73A348003CFD82 /* FzhString.m */; };
+		F68F2032975246901EE21790 /* Pods_FzBluetoothDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F43885670B3A9C2486750C8 /* Pods_FzBluetoothDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01ED38D5F09A97134BAB225D /* Pods-FzBluetoothDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FzBluetoothDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo.release.xcconfig"; sourceTree = "<group>"; };
+		2F43885670B3A9C2486750C8 /* Pods_FzBluetoothDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FzBluetoothDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2FC3231F6F7056003CFD82 /* FzBluetoothDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FzBluetoothDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2FC3271F6F7056003CFD82 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A2FC3291F6F7056003CFD82 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -32,8 +33,6 @@
 		3A2FC3321F6F7056003CFD82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A2FC3351F6F7056003CFD82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A2FC3371F6F7056003CFD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A2FC33E1F6F7060003CFD82 /* FzhBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FzhBluetooth.h; sourceTree = "<group>"; };
-		3A2FC33F1F6F7060003CFD82 /* FzhBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FzhBluetooth.m; sourceTree = "<group>"; };
 		3A2FC3471F6F745B003CFD82 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
 		3A2FC3481F6F745B003CFD82 /* SendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendViewController.m; sourceTree = "<group>"; };
 		3A2FC34B1F6F7B52003CFD82 /* FZHProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZHProgressHUD.h; sourceTree = "<group>"; };
@@ -42,9 +41,7 @@
 		3A2FC3501F6F7B69003CFD82 /* FZBlueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZBlueModel.m; sourceTree = "<group>"; };
 		3A2FC3511F6F7B69003CFD82 /* FZSingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZSingletonManager.h; sourceTree = "<group>"; };
 		3A2FC3521F6F7B69003CFD82 /* FZSingletonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZSingletonManager.m; sourceTree = "<group>"; };
-		3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FzhCallBlock.h; sourceTree = "<group>"; };
-		3A2FC3DF1F73A348003CFD82 /* FzhString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FzhString.h; sourceTree = "<group>"; };
-		3A2FC3E01F73A348003CFD82 /* FzhString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FzhString.m; sourceTree = "<group>"; };
+		83016D86BB9BFF397D061E1B /* Pods-FzBluetoothDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FzBluetoothDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F68F2032975246901EE21790 /* Pods_FzBluetoothDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +61,8 @@
 			children = (
 				3A2FC3251F6F7056003CFD82 /* FzBluetoothDemo */,
 				3A2FC3241F6F7056003CFD82 /* Products */,
+				D006CB779FD7FDA9C32D9656 /* Pods */,
+				A4198C2027CC2ADE17EE6495 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,7 +80,6 @@
 				3A2FC3291F6F7056003CFD82 /* AppDelegate.h */,
 				3A2FC32A1F6F7056003CFD82 /* AppDelegate.m */,
 				3A2FC34A1F6F7B52003CFD82 /* FZHProgressHUD */,
-				3A2FC33D1F6F7060003CFD82 /* FZHBluetooth */,
 				3A2FC34E1F6F7B69003CFD82 /* FZBlueModel */,
 				3A2FC32C1F6F7056003CFD82 /* ViewController.h */,
 				3A2FC32D1F6F7056003CFD82 /* ViewController.m */,
@@ -103,18 +102,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3A2FC33D1F6F7060003CFD82 /* FZHBluetooth */ = {
-			isa = PBXGroup;
-			children = (
-				3A2FC3DE1F73A122003CFD82 /* FzhCallBlock.h */,
-				3A2FC33E1F6F7060003CFD82 /* FzhBluetooth.h */,
-				3A2FC33F1F6F7060003CFD82 /* FzhBluetooth.m */,
-				3A2FC3DF1F73A348003CFD82 /* FzhString.h */,
-				3A2FC3E01F73A348003CFD82 /* FzhString.m */,
-			);
-			path = FZHBluetooth;
-			sourceTree = "<group>";
-		};
 		3A2FC34A1F6F7B52003CFD82 /* FZHProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +122,23 @@
 			path = FZBlueModel;
 			sourceTree = "<group>";
 		};
+		A4198C2027CC2ADE17EE6495 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F43885670B3A9C2486750C8 /* Pods_FzBluetoothDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D006CB779FD7FDA9C32D9656 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83016D86BB9BFF397D061E1B /* Pods-FzBluetoothDemo.debug.xcconfig */,
+				01ED38D5F09A97134BAB225D /* Pods-FzBluetoothDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,9 +146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A2FC33A1F6F7056003CFD82 /* Build configuration list for PBXNativeTarget "FzBluetoothDemo" */;
 			buildPhases = (
+				2379D0AB376BCAE7520D2CAB /* [CP] Check Pods Manifest.lock */,
 				3A2FC31F1F6F7056003CFD82 /* Sources */,
 				3A2FC3201F6F7056003CFD82 /* Frameworks */,
 				3A2FC3211F6F7056003CFD82 /* Resources */,
+				C5B38E68CEC2B99D311B12D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,6 +208,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2379D0AB376BCAE7520D2CAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FzBluetoothDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5B38E68CEC2B99D311B12D0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FZBluetooth/FZBluetooth.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FZBluetooth.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FzBluetoothDemo/Pods-FzBluetoothDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A2FC31F1F6F7056003CFD82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -211,10 +256,8 @@
 				3A2FC3531F6F7B69003CFD82 /* FZBlueModel.m in Sources */,
 				3A2FC34D1F6F7B52003CFD82 /* FZHProgressHUD.m in Sources */,
 				3A2FC32B1F6F7056003CFD82 /* AppDelegate.m in Sources */,
-				3A2FC3E11F73A348003CFD82 /* FzhString.m in Sources */,
 				3A2FC3541F6F7B69003CFD82 /* FZSingletonManager.m in Sources */,
 				3A2FC3281F6F7056003CFD82 /* main.m in Sources */,
-				3A2FC3401F6F7060003CFD82 /* FzhBluetooth.m in Sources */,
 				3A2FC3491F6F745B003CFD82 /* SendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +394,7 @@
 		};
 		3A2FC33B1F6F7056003CFD82 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83016D86BB9BFF397D061E1B /* Pods-FzBluetoothDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7A99RNRSDE;
@@ -364,6 +408,7 @@
 		};
 		3A2FC33C1F6F7056003CFD82 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01ED38D5F09A97134BAB225D /* Pods-FzBluetoothDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7A99RNRSDE;
