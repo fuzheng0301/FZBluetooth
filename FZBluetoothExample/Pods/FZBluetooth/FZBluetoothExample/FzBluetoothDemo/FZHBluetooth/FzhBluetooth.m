@@ -36,6 +36,13 @@
 {
     self = [super init];
     if (self) {
+		//CBCentralManagerOptionShowPowerAlertKey对应的BOOL值，当设为YES时，表示CentralManager初始化时，如果蓝牙没有打开，将弹出Alert提示框
+		//CBCentralManagerOptionRestoreIdentifierKey对应的是一个唯一标识的字符串，用于蓝牙进程被杀掉恢复连接时用的。
+//		dispatch_queue_t centralQueue = dispatch_queue_create("centralQueue",DISPATCH_QUEUE_SERIAL);
+//		NSDictionary *dic = @{CBCentralManagerOptionShowPowerAlertKey : [NSNumber numberWithBool:YES],
+//							  CBCentralManagerOptionRestoreIdentifierKey : @"unique identifier"
+//							  };
+//		fzhCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:centralQueue options:dic];
         fzhCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         resultStr = @"";
         self.serviceArr = [[NSMutableArray alloc]init];
@@ -67,7 +74,7 @@
         case CBCentralManagerStatePoweredOn:
             //discover what peripheral devices are available for your app to connect to
             //第一个参数为CBUUID的数组，需要搜索特点服务的蓝牙设备，只要每搜索到一个符合条件的蓝牙设备都会调用didDiscoverPeripheral代理方法
-            [fzhCentralManager scanForPeripheralsWithServices:nil options:nil];
+            [self startScan];
             break;
         default:
             NSLog(@"Central Manager did change state");
@@ -79,12 +86,17 @@
 - (void)scanForPeripheralsWithPrefixName:(NSString *)nameStr discoverPeripheral:(FZDiscoverPeripheralBlock)discoverBlock;
 {
     prefixString = nameStr;
-    [self start];
+    [self startScan];
     self.discoverPeripheralBlcok = discoverBlock;
 }
 
-- (void)start
+- (void)startScan
 {
+	//不重复扫描已发现设备
+	//CBCentralManagerScanOptionAllowDuplicatesKey设置为NO表示不重复扫瞄已发现设备，为YES就是允许。
+	//CBCentralManagerOptionShowPowerAlertKey设置为YES就是在蓝牙未打开的时候显示弹框
+//	NSDictionary *option = @{CBCentralManagerScanOptionAllowDuplicatesKey : [NSNumber numberWithBool:NO],CBCentralManagerOptionShowPowerAlertKey:[NSNumber numberWithBool:YES]};
+//	[fzhCentralManager scanForPeripheralsWithServices:nil options:option];
     [fzhCentralManager scanForPeripheralsWithServices:nil options:nil];
 }
 
@@ -106,6 +118,7 @@
 }
 
 //搜索蓝牙代理方法
+//在蓝牙于后台被杀掉时，重连之后会首先调用此方法，可以获取蓝牙恢复时的各种状态
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     //
@@ -120,7 +133,7 @@
         } else {
             _discoverPeripheralBlcok(central,peripheral,advertisementData,RSSI);
         }
-        [self start];
+        [self startScan];
     }
     if ([setOrDelNum isEqualToString:@"0"]) {
         //有自动重连的设备
@@ -162,100 +175,14 @@
     }
 }
 
-#pragma mark --- 获取外设的信号强度
-- (void)readRSSICompletionBlock:(FZGetRSSIBlock)getRSSIBlock
+#pragma mark --- 断开蓝牙连接走这里
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    self.getRSSIBlock = getRSSIBlock;
-    [fzhPeripheral readRSSI];
-}
-
-#pragma mark --- 写入数据
-- (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock  returnBlock:(FZEquipmentReturnBlock)equipmentBlock
-{
-    writeCount = 0;
-    responseCount = 0;
-    
-    NSMutableArray *sendArr = [[NSMutableArray alloc]init];
-    if (dataStr.length > 40) {
-        int count = (int)dataStr.length / 40 + 1;
-        for (int i = 0; i < count; i ++) {
-            if (i < count-1) {
-                [sendArr addObject:[dataStr substringWithRange:NSMakeRange(0+i*40, 40)]];
-            } else {
-                [sendArr addObject:[dataStr substringFromIndex:i*40]];
-            }
-        }
-        for (NSString *sendStr in sendArr) {
-            NSData *data = [[FzhString sharedInstance] convertHexStrToData:sendStr];
-            _writeToCharacteristicBlock = completionBlock;
-            _equipmentReturnBlock = equipmentBlock;
-            if (fzhPeripheral == nil) {
-                NSString *desc = NSLocalizedString(@"Not connected devices", @"");
-                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-                NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
-                                                     code:-101
-                                                 userInfo:userInfo];
-                _writeToCharacteristicBlock(nil,error);
-                return;
-            }
-            [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-            writeCount ++;
-        }
-        return;
-    }
-    NSData *data = [[FzhString sharedInstance] convertHexStrToData:dataStr];
-    _writeToCharacteristicBlock = completionBlock;
-    _equipmentReturnBlock = equipmentBlock;
-    if (fzhPeripheral == nil) {
-        NSString *desc = NSLocalizedString(@"Not connected devices", @"");
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-        NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
-                                             code:-101
-                                         userInfo:userInfo];
-        _writeToCharacteristicBlock(nil,error);
-        return;
-    }
-    [fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    writeCount ++;
-}
-
-#pragma mark --- 写入数据 同步返回数据
--(NSDictionary *)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic
-{
-	__block NSString * str = nil;
-	__block NSError *reError = nil;
-	[self writeValue:dataStr forCharacteristic:characteristic completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
-		NSLog(@"发送成功");
-		reError = error;
-	} returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
-		str = returnStr;
-		reError = error;
-	}];
-	
-	while (!str) {
-		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
-	}
-	
-	NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-	[dict setValue:reError forKey:@"error"];
-	[dict setValue:str forKey:@"returnStr"];
-	return dict;
-}
-
-//写数据后回调
-- (void)peripheral:(CBPeripheral *)peripheral
-didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
-             error:(NSError *)error
-{
-    resultStr = @"";
-    if (!_writeToCharacteristicBlock) {
-        return;
-    }
-    responseCount ++;
-    if (writeCount != responseCount) {
-        return;
-    }
-    _writeToCharacteristicBlock(characteristic,error);
+	[self cancelPeripheralConnection];
+	if (error)
+		{
+		NSLog(@">>> didDisconnectPeripheral for %@ with error: %@", peripheral.name, [error localizedDescription]);
+		}
 }
 
 #pragma mark --- 停止扫描
@@ -301,16 +228,6 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
 	} @finally {
 	}
 	return p;
-}
-
-#pragma mark --- 断开蓝牙连接走这里
-- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
-{
-    [self cancelPeripheralConnection];
-    if (error)
-    {
-        NSLog(@">>> didDisconnectPeripheral for %@ with error: %@", peripheral.name, [error localizedDescription]);
-    }
 }
 
 //获取服务后的回调
@@ -392,7 +309,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     [peripheral readValueForCharacteristic:characteristic];
 }
 
-// 获取到特征的值时回调
+// 读数据时回调
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
@@ -409,6 +326,101 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
             _equipmentReturnBlock(peripheral,characteristic,resultStr,error);
         }
     }
+}
+
+//写数据后回调
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
+			 error:(NSError *)error
+{
+	resultStr = @"";
+	if (!_writeToCharacteristicBlock) {
+		return;
+	}
+	responseCount ++;
+	if (writeCount != responseCount) {
+		return;
+	}
+	_writeToCharacteristicBlock(characteristic,error);
+}
+
+#pragma mark --- 写入数据
+- (void)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic completionBlock:(FZWriteToCharacteristicBlock)completionBlock  returnBlock:(FZEquipmentReturnBlock)equipmentBlock
+{
+	writeCount = 0;
+	responseCount = 0;
+	
+	NSMutableArray *sendArr = [[NSMutableArray alloc]init];
+	if (dataStr.length > 40) {
+		int count = (int)dataStr.length / 40 + 1;
+		for (int i = 0; i < count; i ++) {
+			if (i < count-1) {
+				[sendArr addObject:[dataStr substringWithRange:NSMakeRange(0+i*40, 40)]];
+			} else {
+				[sendArr addObject:[dataStr substringFromIndex:i*40]];
+			}
+		}
+		for (NSString *sendStr in sendArr) {
+			NSData *data = [[FzhString sharedInstance] convertHexStrToData:sendStr];
+			_writeToCharacteristicBlock = completionBlock;
+			_equipmentReturnBlock = equipmentBlock;
+			if (fzhPeripheral == nil) {
+				NSString *desc = NSLocalizedString(@"Not connected devices", @"");
+				NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+				NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
+													 code:-101
+												 userInfo:userInfo];
+				_writeToCharacteristicBlock(nil,error);
+				return;
+			}
+			[fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+			writeCount ++;
+		}
+		return;
+	}
+	NSData *data = [[FzhString sharedInstance] convertHexStrToData:dataStr];
+	_writeToCharacteristicBlock = completionBlock;
+	_equipmentReturnBlock = equipmentBlock;
+	if (fzhPeripheral == nil) {
+		NSString *desc = NSLocalizedString(@"Not connected devices", @"");
+		NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+		NSError *error = [NSError errorWithDomain:@"com.okey.wearkit.ErrorDomain"
+											 code:-101
+										 userInfo:userInfo];
+		_writeToCharacteristicBlock(nil,error);
+		return;
+	}
+	[fzhPeripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+	writeCount ++;
+}
+
+#pragma mark --- 写入数据 同步返回数据
+-(NSDictionary *)writeValue:(NSString *)dataStr forCharacteristic:(CBCharacteristic *)characteristic
+{
+	__block NSString * str = nil;
+	__block NSError *reError = nil;
+	[self writeValue:dataStr forCharacteristic:characteristic completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+		NSLog(@"发送成功");
+		reError = error;
+	} returnBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *returnStr, NSError *error) {
+		str = returnStr;
+		reError = error;
+	}];
+	
+	while (!str) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+	}
+	
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+	[dict setValue:reError forKey:@"error"];
+	[dict setValue:str forKey:@"returnStr"];
+	return dict;
+}
+
+#pragma mark --- 获取外设的信号强度
+- (void)readRSSICompletionBlock:(FZGetRSSIBlock)getRSSIBlock
+{
+	self.getRSSIBlock = getRSSIBlock;
+	[fzhPeripheral readRSSI];
 }
 
 #pragma mark ---------------- 获取信号之后的回调 ------------------

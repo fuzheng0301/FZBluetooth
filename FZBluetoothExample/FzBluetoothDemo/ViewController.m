@@ -49,6 +49,8 @@
     [FzhBluetooth shareInstance].delegate = self;
     //删除自动重连
     [[FzhBluetooth shareInstance] createAutomaticConnectionEquipmenWithSetOrDelate:DelateAutomaticConnectionEquipmen Peripheral:nil];
+	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"DeviceUUID"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didHaveAutoConnection) name:PostAutoConnectionNotificaiton object:nil];
 	
@@ -129,7 +131,7 @@
 #pragma mark --- 搜索蓝牙设备
 -(void)scanBluetooths
 {
-    [[FzhBluetooth shareInstance] scanForPeripheralsWithPrefixName:@"okey" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
+    [[FzhBluetooth shareInstance] scanForPeripheralsWithPrefixName:@"MI" discoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
         
         NSInteger perpheralIndex = -1 ;
