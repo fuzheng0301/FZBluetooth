@@ -172,7 +172,7 @@
 				TargetAttributes = {
 					3A2FC3221F6F7056003CFD82 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 7A99RNRSDE;
+						DevelopmentTeam = U99K52B2HT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -182,6 +182,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -397,7 +398,8 @@
 			baseConfigurationReference = 83016D86BB9BFF397D061E1B /* Pods-FzBluetoothDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7A99RNRSDE;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = U99K52B2HT;
 				INFOPLIST_FILE = FzBluetoothDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -411,7 +413,7 @@
 			baseConfigurationReference = 01ED38D5F09A97134BAB225D /* Pods-FzBluetoothDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7A99RNRSDE;
+				DEVELOPMENT_TEAM = U99K52B2HT;
 				INFOPLIST_FILE = FzBluetoothDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
